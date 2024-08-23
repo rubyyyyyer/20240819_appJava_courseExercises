@@ -1,6 +1,6 @@
-package com.example.myapplication2;
+package com.example.javacourseexercises;
 
-public class HelloJava {
+public class Hello {
     public static void main(String[] args) {
         System.out.println("hello qqqqqq");
     }
