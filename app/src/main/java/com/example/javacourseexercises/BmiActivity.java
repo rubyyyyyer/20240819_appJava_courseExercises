@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,7 +58,7 @@ public class BmiActivity extends AppCompatActivity {
         Toast.makeText(this,"You're BMI is："+bmi,Toast.LENGTH_LONG).show();
         //直接顯示在畫面上
         showBmi.setText("" + bmi);
-        //使用對話框顯示訊息
+/*        //使用對話框顯示訊息
         new AlertDialog.Builder(this)
                 .setTitle("BMI")
                 .setMessage("You're BMI is" + bmi)
@@ -69,7 +70,13 @@ public class BmiActivity extends AppCompatActivity {
                         showBmi.setText("");
                     }
                 })
-                .show();
+                .show();*/
+
+        //Intent
+        Intent intent = new Intent(this,BmiResultActivity.class);
+        intent.putExtra("Bmi",bmi);
+        startActivity(intent);
+
     }
 
 }
