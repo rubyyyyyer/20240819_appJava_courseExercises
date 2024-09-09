@@ -40,7 +40,7 @@ public class People {
     }
 
     public void helloname(String name) {
-        System.out.println("Hello, " + name);
+        System.out.println("BmiBmi, " + name);
     }
 
     public float bmi() {

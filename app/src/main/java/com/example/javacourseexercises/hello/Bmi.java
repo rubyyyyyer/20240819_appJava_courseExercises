@@ -1,6 +1,6 @@
 package com.example.javacourseexercises.hello;
 
-public class Hello {
+public class Bmi {
     public static void main(String[] args) {
         //如果有撰寫到其他建構子，空建構子就要自己寫。
         People hello = new People();
