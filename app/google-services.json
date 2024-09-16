@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "624594769818",
+    "firebase_url": "https://atmaccount-823ab-default-rtdb.firebaseio.com",
+    "project_id": "atmaccount-823ab",
+    "storage_bucket": "atmaccount-823ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624594769818:android:cbfa42c394832acd5c8c23",
+        "android_client_info": {
+          "package_name": "com.example.JavaClass"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Rli3mPzAOx9triw1BXYQbWEBlcvMwYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624594769818:android:0d4289d95a0baf355c8c23",
+        "android_client_info": {
+          "package_name": "com.example.fitness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Rli3mPzAOx9triw1BXYQbWEBlcvMwYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624594769818:android:310840abb488a4c65c8c23",
+        "android_client_info": {
+          "package_name": "com.example.javacourseexercises"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Rli3mPzAOx9triw1BXYQbWEBlcvMwYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
