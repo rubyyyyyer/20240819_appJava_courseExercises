@@ -1,4 +1,4 @@
-package com.example.javacourseexercises;
+package com.example.javacourseexercises.Student;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.javacourseexercises.R;
 
 public class ScoreActivity extends AppCompatActivity {
 

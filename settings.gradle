@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Java Course Exercises"
+rootProject.name = " "
 include ':app'

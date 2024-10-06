@@ -7,13 +7,13 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label=" "
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JavaCourseExercises"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:exported="false" />
         <!--
                 <activity
@@ -22,7 +22,7 @@
             android:theme="@style/Theme.JavaCourseExercises" />
         -->
         <activity
-            android:name=".MainActivity"
+            android:name=".login.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BmiResultActivity"
+            android:name=".hello.BmiResultActivity"
             android:exported="false" />
         <!--
                 <activity
@@ -39,7 +39,7 @@
             android:exported="false" />
         -->
         <activity
-            android:name=".BmiActivity"
+            android:name=".hello.BmiActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScoreActivity"
+            android:name=".Student.ScoreActivity"
             android:exported="false" />
     </application>
 

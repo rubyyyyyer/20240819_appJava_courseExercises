@@ -1,8 +1,7 @@
-package com.example.javacourseexercises;
+package com.example.javacourseexercises.login;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -17,9 +16,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.javacourseexercises.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
 
         findViews();
     }
@@ -121,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         String firebasePWD = (String) snapshot.getValue();
 //                        Log.d(TAG, "firebasePWD: "+firebasePWD);
                         if (input_pwd_tos.equals(firebasePWD)) {
-                            Toast.makeText(LoginActivity.this, "登入成功", Toast.LENGTH_LONG)
+                            Toast.makeText(LoginActivity.this, getSharedPreferences("Logon", MODE_PRIVATE).getString("ids", "") + ", 登入成功", Toast.LENGTH_LONG)
                                     .show();
                             if (remember_ids && remember_pwd) {
                                 getSharedPreferences("Logon", MODE_PRIVATE)
