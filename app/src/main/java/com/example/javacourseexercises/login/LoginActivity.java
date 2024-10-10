@@ -1,7 +1,11 @@
 package com.example.javacourseexercises.login;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -12,6 +16,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -25,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
+    private static final int REQUEST_CODE_CAMERA = 5;
     private EditText input_ids_et;
     private EditText input_pwd_et;
     private CheckBox cb_rem_ids;
@@ -41,7 +48,28 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        //使用者是否允許使用 APP 的危險權限
+        //打算檢查的權限字串：Manifest.permission.CAMERA，這個值就是去詢問系統有沒有收到使用者同意的一個值。
+        int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        //PERMISSION_GRANTED 這個值已經定義在 PackageManager 中的常數。同意存取是「0」；拒絕存取是「-1」。
+        if (permission == PackageManager.PERMISSION_GRANTED){
+            takePhoto();
+        }else{
+            //support v4 的 ActivityCompact
+            //requestPermissions 會跳出詢問使用者權限的對話框
+            //String[]：可以同時訊問多格權限，所以是字串陣列，權限之間加上逗點。
+            //REQUEST_CODE_CAMERA：是自己設定的常數值，用來辨別是否從這個對話框返回的常數值。
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},REQUEST_CODE_CAMERA);
+        }
+
         findViews();
+    }
+
+    private void takePhoto() {
+        //打開相機的功能，action：MediaStore.ACTION_IMAGE_CAPTURE 告訴系統打開相機。
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivity(cameraIntent);
     }
 
     private void findViews() {
@@ -93,6 +121,21 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    //requestCode：就是 REQUEST_CODE_CAMERA
+    //permissions：就是什麼權限的字串陣列，new String[]{Manifest.permission.CAMERA}
+    //grantResults：使用這在對話框是選擇允許還是拒絕，PackageManager.PERMISSION_GRANTED
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //是不是從對話框來的：REQUEST_CODE_CAMERA
+        if (requestCode == REQUEST_CODE_CAMERA){
+            //使用者是選擇允許還是拒絕。允許是「0」；拒絕是「-1」。
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                takePhoto();
+            }
+        }
+    }
 
     public void login(View v) {
 
