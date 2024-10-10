@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="functions">
+    <string-array name="listFunctions">
         <item>會員服務</item>
         <item>交易紀錄</item>
         <item>Q&amp;A</item>
         <item>會員資料</item>
-        <item>每日遊戲</item>
         <item>登出</item>
         <item>離開</item>
+    </string-array>
+    <string-array name="gameFunctions">
+        <item>賓果遊戲</item>
+        <item>顏色遊戲</item>
+        <item>射擊遊戲</item>
+        <item>猜數字遊戲</item>
+        <item>撲克牌遊戲</item>
     </string-array>
 </resources>

@@ -119,8 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         String firebasePWD = (String) snapshot.getValue();
 //                        Log.d(TAG, "firebasePWD: "+firebasePWD);
                         if (input_pwd_tos.equals(firebasePWD)) {
-                            Toast.makeText(LoginActivity.this, getSharedPreferences("Logon", MODE_PRIVATE).getString("ids", "") + ", 登入成功", Toast.LENGTH_LONG)
-                                    .show();
+
                             if (remember_ids && remember_pwd) {
                                 getSharedPreferences("Logon", MODE_PRIVATE)
                                         .edit()
@@ -167,6 +166,8 @@ public class LoginActivity extends AppCompatActivity {
                                     })
                                     .show();
                         }
+                        Toast.makeText(LoginActivity.this, getSharedPreferences("Logon", MODE_PRIVATE).getString("ids", "") + ", 登入成功", Toast.LENGTH_LONG)
+                                .show();
 
                     }
 

@@ -27,7 +27,7 @@ public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.Functi
     public FunctionAdapter(Context context, OnItemListener listener) {
         this.context = context;
         this.listener = listener;
-        functions = context.getResources().getStringArray(R.array.functions);
+        functions = context.getResources().getStringArray(R.array.listFunctions);
     }
 
     @NonNull

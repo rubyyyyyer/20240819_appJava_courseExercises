@@ -12,11 +12,14 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +27,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javacourseexercises.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //Function Adapter OnItemExitListener 利用介面來傳遞值
 interface OnItemListener {
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
     private ActivityMainBinding binding;
     private ActivityResultLauncher activityResultLauncher;
     private Intent intent;
+    private List<Function> gameFunctions;
     //    private String[] functions = null;
 
 
@@ -102,15 +110,87 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
                         .setAction("Action", null).show();
             }
         });
-        //RecycleView
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+
+
+        //RecycleView_grid
+        setupFunctions();
+        RecyclerView recyclerViewGrid = findViewById(R.id.recyclerView_grid);
+        recyclerViewGrid.setHasFixedSize(true);
+        recyclerViewGrid.setLayoutManager(new GridLayoutManager(this,3));
+
+        //adapter_grid
+        FunctionIconAdapter adapterGrid = new FunctionIconAdapter();
+        recyclerViewGrid.setAdapter(adapterGrid);
+
+
+        //-------------------------------------------------------------------
+        //RecycleView_line
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_list);
         recyclerView.setHasFixedSize(true); //固定大小
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //adapter
-        FunctionAdapter adapter = new FunctionAdapter(this, this);
-        recyclerView.setAdapter(adapter);
+        //adapter_line
+        FunctionAdapter adapterList = new FunctionAdapter(this, this);
+        recyclerView.setAdapter(adapterList);
 
 
+    }
+
+    private void setupFunctions() {
+        gameFunctions = new ArrayList<>();
+        String[] functionItem = getResources().getStringArray(R.array.gameFunctions);
+        gameFunctions.add(new Function(functionItem[0],R.drawable.ic_game_guessnum));
+        gameFunctions.add(new Function(functionItem[1],R.drawable.ic_game_color));
+        gameFunctions.add(new Function(functionItem[2],R.drawable.ic_game_shoot));
+        gameFunctions.add(new Function(functionItem[3],R.drawable.ic_game_dice));
+        gameFunctions.add(new Function(functionItem[4],R.drawable.ic_game_poker));
+    }
+
+    public class FunctionIconAdapter extends RecyclerView.Adapter<FunctionIconAdapter.IconViewHolder> {
+
+
+        @NonNull
+        @Override
+        public IconViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = getLayoutInflater().inflate(R.layout.item_icon,parent,false);
+            return new IconViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull IconViewHolder holder, int position) {
+            Function functionsPosition = gameFunctions.get(position);
+            holder.gametext.setText(functionsPosition.getGametext());
+            holder.gameImg.setImageResource(functionsPosition.getGameImg());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    gameClicked(functionsPosition);
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return gameFunctions.size();
+        }
+
+        public class IconViewHolder extends RecyclerView.ViewHolder{
+            ImageView gameImg ;
+            TextView gametext;
+
+            public IconViewHolder(@NonNull View itemView) {
+                super(itemView);
+                gameImg = itemView.findViewById(R.id.gameImg);
+                gametext = itemView.findViewById(R.id.gametext);
+            }
+        }
+
+
+    }
+
+    private void gameClicked(Function functionsPosition) {
+        Log.d(TAG, "onClick: " + functionsPosition.getGametext());
     }
 
 
@@ -120,6 +200,8 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
         TextView welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome, " + getSharedPreferences("Logon", MODE_PRIVATE)
                 .getString("ids", ""));
+
+
 
     }
 

@@ -1,20 +1,28 @@
 package com.example.javacourseexercises.login;
 
 public class Function {
-/*    String name;
+    String gametext;
+    int gameImg;
 
-    public Function() {
+    public Function(String gametext, int gameImg) {
+        this.gametext = gametext;
+        this.gameImg = gameImg;
     }
 
-    public Function(String name) {
-        this.name = name;
+
+    public String getGametext() {
+        return gametext;
     }
 
-    public String getName() {
-        return name;
+    public void setGametext(String gametext) {
+        this.gametext = gametext;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }*/
+    public int getGameImg() {
+        return gameImg;
+    }
+
+    public void setGameImg(int gameImg) {
+        this.gameImg = gameImg;
+    }
 }
