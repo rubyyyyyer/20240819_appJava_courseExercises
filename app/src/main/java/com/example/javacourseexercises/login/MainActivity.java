@@ -232,6 +232,26 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
 //        Log.d(TAG, "onClick(main): 總共有幾項, functions.length>>>" + functions.length);
 //        Log.d(TAG, "onClick(main): test, functions.length-1>>>" + (functions.length-1));
 
+        switch (functions[position]){
+            case  "會員服務":
+                Log.d(TAG, "OnItemClicked: 我是會員服務");
+                break;
+            case  "交易紀錄":
+                Log.d(TAG, "OnItemClicked: 我是交易紀錄");
+                break;
+            case  "Q&A":
+                Log.d(TAG, "OnItemClicked: 我是Q&A");
+                break;
+            case  "聯絡人管理":
+                Log.d(TAG, "OnItemClicked: 我是聯絡人資料");
+                Intent contactsIntent = new Intent(this, ContactsActivity.class);
+                startActivity(contactsIntent);
+                break;
+
+        }
+
+
+
         //登出
         if ((position + 1) == (functions.length-1)){
             intent = new Intent(this, LoginActivity.class);
@@ -250,7 +270,6 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
                         }
                     })
                     .show();
-
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.javacourseexercises.login;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,6 +14,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -25,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
+
     private EditText input_ids_et;
     private EditText input_pwd_et;
     private CheckBox cb_rem_ids;
@@ -43,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
 
         findViews();
     }
+
+
 
     private void findViews() {
         input_ids_et = findViewById(R.id.input_ids);
