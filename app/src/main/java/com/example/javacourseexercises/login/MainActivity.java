@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
             getSupportActionBar().hide();
         }*/
 
-        TextView welcome = findViewById(R.id.welcome);
+        TextView welcome = findViewById(R.id.textWelcome);
         welcome.setTextColor(Color.parseColor("#EADDFF"));
         welcome.setText("Welcome, " + getSharedPreferences("Logon", MODE_PRIVATE)
                 .getString("ids", ""));
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
     @Override
     protected void onResume() {
         super.onResume();
-        TextView welcome = findViewById(R.id.welcome);
+        TextView welcome = findViewById(R.id.textWelcome);
         welcome.setText("Welcome, " + getSharedPreferences("Logon", MODE_PRIVATE)
                 .getString("ids", ""));
 

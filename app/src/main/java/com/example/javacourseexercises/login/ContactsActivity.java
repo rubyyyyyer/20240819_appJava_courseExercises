@@ -3,9 +3,13 @@ package com.example.javacourseexercises.login;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -15,16 +19,27 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javacourseexercises.R;
+import com.example.javacourseexercises.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactsActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CONTACTS = 10;
     private static final String TAG = ContactsActivity.class.getSimpleName();
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.toolbar);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_contact);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -32,6 +47,9 @@ public class ContactsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        TextView textContacts = findViewById(R.id.textContacts);
+        textContacts.setTextColor(Color.parseColor("#EADDFF"));
 
         int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
         if (permission == PackageManager.PERMISSION_GRANTED){
@@ -57,6 +75,8 @@ public class ContactsActivity extends AppCompatActivity {
         Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
 
+        List<Contact> contactList = new ArrayList<>();
+
         //cursor.moveToNext()，如果往下移一筆有資料的話就回傳 true，沒有資料就是 false。
         while (cursor.moveToNext()){
             //cursor.getString(Int i)：欄位的 index 值，也就是單筆資料裡，每個欄位的索引值。
@@ -76,6 +96,9 @@ public class ContactsActivity extends AppCompatActivity {
             Log.d(TAG, "readContacts: " + name);
             Log.d(TAG, "readContacts: " + id);
 
+            Contact contact = new Contact(id,name);
+
+
             if (hasPhone == 1){
                 //ContactsContract.CommonDataKinds.Phone，電話號碼的 Contract 中有一個欄位稱 CONTENT_URI。
                 //Selection / SelectionArgs：(SQL)這是 Where 語法中的表現方式。
@@ -89,10 +112,71 @@ public class ContactsActivity extends AppCompatActivity {
                 while (cursorPhone.moveToNext()){
                     String phone = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA));
                     Log.d(TAG, "readContacts: " + phone);
+
+                    contact.getPhones().add(phone);
                 }
             }
+            contactList.add(contact);
         }
+
+        ContactAdapter contactAdapter = new ContactAdapter(contactList);
+
+        RecyclerView recyclerViewContacts = findViewById(R.id.recyclerView_contacts);
+        recyclerViewContacts.setHasFixedSize(true);
+        recyclerViewContacts.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewContacts.setAdapter(contactAdapter);
     }
+
+
+    public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
+        List<Contact> contactList;
+        public ContactAdapter(List<Contact> contactList){
+            this.contactList = contactList;
+        }
+
+
+        @NonNull
+        @Override
+        public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = getLayoutInflater().inflate(android.R.layout.simple_expandable_list_item_2, parent, false);
+            return new ContactViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
+            Contact contact = contactList.get(position);
+            holder.nameText.setText(contact.getName());
+            StringBuilder sb = new StringBuilder();
+            for (String phone : contact.getPhones()) {
+                sb.append(phone);
+                sb.append("\n");
+            }
+            holder.phoneText.setText(sb.toString());
+        }
+
+        @Override
+        public int getItemCount() {
+            return contactList.size();
+        }
+
+        public class ContactViewHolder extends RecyclerView.ViewHolder {
+            TextView nameText;
+            TextView phoneText;
+
+            public ContactViewHolder(@NonNull View itemView) {
+                super(itemView);
+                nameText = itemView.findViewById(android.R.id.text1);
+                phoneText = itemView.findViewById(android.R.id.text2);
+            }
+        }
+
+
+
+
+    }
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
