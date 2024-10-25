@@ -83,10 +83,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (cb_rem_ids.isChecked()) {
-                    getSharedPreferences("Logon", MODE_PRIVATE).
-                            edit().
-                            putBoolean("REM_PWD", isChecked).
-                            commit();
+                    getSharedPreferences("Logon", MODE_PRIVATE)
+                            .edit()
+                            .putBoolean("REM_PWD", isChecked)
+                            .commit();
                 } else {
                     cb_rem_pwd.setChecked(false);
                 }

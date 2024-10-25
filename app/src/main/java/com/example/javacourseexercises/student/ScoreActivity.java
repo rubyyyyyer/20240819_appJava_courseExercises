@@ -1,4 +1,4 @@
-package com.example.javacourseexercises.Student;
+package com.example.javacourseexercises.student;
 
 import android.os.Bundle;
 

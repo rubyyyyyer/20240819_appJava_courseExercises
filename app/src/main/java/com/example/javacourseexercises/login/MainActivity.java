@@ -17,6 +17,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
     //    private static final int REQUEST_LOGIN = 100;
     Boolean logon = false;
 
-    private AppBarConfiguration appBarConfiguration;
+//    private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
     private ActivityResultLauncher activityResultLauncher;
     private Intent intent;
@@ -136,6 +138,22 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
 
     }
 
+/*    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu: 執行到這裡了嗎？");
+        getMenuInflater().inflate(R.menu.menu_contacts, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.actionUpload){
+            //Upload to Firebase
+            Log.d(TAG, "onOptionsItemSelected: HIHIHIHIHIHIHIHIHIHIHIHIHIH~");
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
+
     private void setupFunctions() {
         gameFunctions = new ArrayList<>();
         String[] functionItem = getResources().getStringArray(R.array.gameFunctions);
@@ -216,12 +234,12 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
         }
     }*/
 
-    @Override
+   /* @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_graph);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
+    }*/
 
     // 覆寫中 OnItemExitListener 的 OnItemExitClicked
     @Override

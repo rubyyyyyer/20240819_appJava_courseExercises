@@ -8,7 +8,7 @@
     tools:context=".login.ContactsActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
+        android:id="@+id/toolbar_contact"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:background="#21005D"
@@ -27,10 +27,10 @@
         android:text="Contacts"
         android:textAlignment="viewStart"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
-        app:layout_constraintStart_toStartOf="@+id/toolbar3"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3" />
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_contact"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_contact"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_contact"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_contact" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_contacts"
@@ -43,6 +43,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
