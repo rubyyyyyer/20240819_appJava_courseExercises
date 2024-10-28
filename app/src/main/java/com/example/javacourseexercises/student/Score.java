@@ -1,4 +1,4 @@
-package com.example.javacourseexercises.Student;
+package com.example.javacourseexercises.student;
 
 public class Score {
     public static void main(String[] args) {

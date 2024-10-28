@@ -17,6 +17,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
     //    private static final int REQUEST_LOGIN = 100;
     Boolean logon = false;
 
-    private AppBarConfiguration appBarConfiguration;
+//    private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
     private ActivityResultLauncher activityResultLauncher;
     private Intent intent;
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
             getSupportActionBar().hide();
         }*/
 
-        TextView welcome = findViewById(R.id.welcome);
+        TextView welcome = findViewById(R.id.textWelcome);
         welcome.setTextColor(Color.parseColor("#EADDFF"));
         welcome.setText("Welcome, " + getSharedPreferences("Logon", MODE_PRIVATE)
                 .getString("ids", ""));
@@ -136,6 +138,22 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
 
     }
 
+/*    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu: 執行到這裡了嗎？");
+        getMenuInflater().inflate(R.menu.menu_contacts, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.actionUpload){
+            //Upload to Firebase
+            Log.d(TAG, "onOptionsItemSelected: HIHIHIHIHIHIHIHIHIHIHIHIHIH~");
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
+
     private void setupFunctions() {
         gameFunctions = new ArrayList<>();
         String[] functionItem = getResources().getStringArray(R.array.gameFunctions);
@@ -197,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
     @Override
     protected void onResume() {
         super.onResume();
-        TextView welcome = findViewById(R.id.welcome);
+        TextView welcome = findViewById(R.id.textWelcome);
         welcome.setText("Welcome, " + getSharedPreferences("Logon", MODE_PRIVATE)
                 .getString("ids", ""));
 
@@ -216,12 +234,12 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
         }
     }*/
 
-    @Override
+   /* @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_graph);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
+    }*/
 
     // 覆寫中 OnItemExitListener 的 OnItemExitClicked
     @Override
@@ -231,6 +249,26 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
 //        Log.d(TAG, "onClick(main): 點擊了第position + 1>>>" + (position + 1) + "項");
 //        Log.d(TAG, "onClick(main): 總共有幾項, functions.length>>>" + functions.length);
 //        Log.d(TAG, "onClick(main): test, functions.length-1>>>" + (functions.length-1));
+
+        switch (functions[position]){
+            case  "會員服務":
+                Log.d(TAG, "OnItemClicked: 我是會員服務");
+                break;
+            case  "交易紀錄":
+                Log.d(TAG, "OnItemClicked: 我是交易紀錄");
+                break;
+            case  "Q&A":
+                Log.d(TAG, "OnItemClicked: 我是Q&A");
+                break;
+            case  "聯絡人管理":
+                Log.d(TAG, "OnItemClicked: 我是聯絡人資料");
+                Intent contactsIntent = new Intent(this, ContactsActivity.class);
+                startActivity(contactsIntent);
+                break;
+
+        }
+
+
 
         //登出
         if ((position + 1) == (functions.length-1)){
@@ -250,7 +288,6 @@ public class MainActivity extends AppCompatActivity implements OnItemListener {
                         }
                     })
                     .show();
-
         }
     }
 }

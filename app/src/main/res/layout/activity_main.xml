@@ -41,7 +41,7 @@
         app:titleTextColor="#21005D" />
 
     <TextView
-        android:id="@+id/welcome"
+        android:id="@+id/textWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="14dp"
